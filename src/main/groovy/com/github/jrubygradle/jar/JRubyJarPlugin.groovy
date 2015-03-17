@@ -33,6 +33,11 @@ class JRubyJarPlugin implements Plugin<Project> {
     }
 
     @PackageScope
+    void disableJarArtifact(Project project) {
+      project.configurations.archives.artifacts.removeAll { it.archiveTask.is jar }
+    }
+
+    @PackageScope
     void addCodeGenerationTask(Project project) {
 
         Task stubTask = project.tasks.create( name: BOOTSTRAP_TASK_NAME, type : Copy )
